@@ -1,9 +1,11 @@
 package GDrive
 
 import (
+	"fmt"
 	"mime"
 	"net/http"
 	"os"
+	"reflect"
 	"strings"
 
 	"path/filepath"
@@ -33,7 +35,9 @@ func DeleteFile(fileId, token string) (int, string) {
 }
 func CreateFile(token, filefullpath, emailAddr, role string, sendNotification bool) (int, string) {
 	f, err := os.Open(filefullpath)
+
 	_, name := filepath.Split(filefullpath)
+
 	defer f.Close()
 	if err != nil {
 		return 101, err.Error()
@@ -46,15 +50,28 @@ func CreateFile(token, filefullpath, emailAddr, role string, sendNotification bo
 		ext := filepath.Ext(f.Name())
 		baseMimeType := mime.TypeByExtension(ext)
 		convertedMimeType := mime.TypeByExtension(ext)
+
 		file := &drive.File{
 			Name:     name,
 			MimeType: convertedMimeType,
 		}
 		res, err := srv.Files.Create(file).Media(f, googleapi.ContentType(baseMimeType)).Do()
-
+		fmt.Println("error ", reflect.TypeOf(err))
 		if err != nil {
-			a := err.(*googleapi.Error)
-			return a.Code, a.Message
+
+			switch reflect.TypeOf(err).String() {
+			case "*googleapi.Error":
+				{
+					a := err.(*googleapi.Error)
+					return a.Code, a.Message
+				}
+
+			default:
+				{
+					return 102, err.Error()
+				}
+			}
+
 		} else {
 			uploadSuccess := true
 			if len(emailAddr) > 0 {

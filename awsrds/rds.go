@@ -36,6 +36,10 @@ func StartRdsInstance(accessKeyId, secretAccessKey, region string, startDbInstnc
 			fmt.Println(aerr.Error())
 			return aerr.StatusCode(), aerr.Error()
 
+		} else if aerr, ok := err.(awserr.Error); ok {
+			fmt.Println(aerr.Error())
+			return 106, aerr.Error()
+
 		}
 
 	}
@@ -54,6 +58,10 @@ func StopRdsInstance(accessKeyId, secretAccessKey, region string, stopDbInstnceR
 		if aerr, ok := err.(awserr.RequestFailure); ok {
 			fmt.Println(aerr.Error())
 			return aerr.StatusCode(), aerr.Error()
+
+		} else if aerr, ok := err.(awserr.Error); ok {
+			fmt.Println(aerr.Error())
+			return 106, aerr.Error()
 
 		}
 
@@ -74,6 +82,10 @@ func RebootRdsInstance(accessKeyId, secretAccessKey, region string, rebootDbInst
 			fmt.Println(aerr.Error())
 			return aerr.StatusCode(), aerr.Error()
 
+		} else if aerr, ok := err.(awserr.Error); ok {
+			fmt.Println(aerr.Error())
+			return 106, aerr.Error()
+
 		}
 
 	}
@@ -92,6 +104,10 @@ func DeleteRdsInstance(accessKeyId, secretAccessKey, region string, deleteDbInst
 		if aerr, ok := err.(awserr.RequestFailure); ok {
 			fmt.Println(aerr.Error())
 			return aerr.StatusCode(), aerr.Error()
+
+		} else if aerr, ok := err.(awserr.Error); ok {
+			fmt.Println(aerr.Error())
+			return 106, aerr.Error()
 
 		}
 

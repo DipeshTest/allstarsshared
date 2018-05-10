@@ -129,6 +129,10 @@ func CreateRdsInstance(accessKeyId, secretAccessKey, region string, createDbInst
 			fmt.Println(aerr.Error())
 			return aerr.StatusCode(), aerr.Error()
 
+		} else if aerr, ok := err.(awserr.Error); ok {
+			fmt.Println(aerr.Error())
+			return 106, aerr.Error()
+
 		}
 
 	}

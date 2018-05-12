@@ -188,17 +188,17 @@ func UserSearch(consumerKey, consumerSecret, accessToken, accessTokenSecret, sea
 	return 200, string(resp)
 }
 
-// func Follow(consumerKey, consumerSecret, accessToken, accessTokenSecret, twitterHandle string) (int, string) {
-// 	anaconda.SetConsumerKey(consumerKey)
-// 	anaconda.SetConsumerSecret(consumerSecret)
-// 	api := anaconda.NewTwitterApi(accessToken, accessTokenSecret)
-// 	resp, err := api.FollowUser(twitterHandle)
-// 	if err != nil {
-// 		abc := err.(*anaconda.ApiError)
-// 		return abc.StatusCode, abc.Error()
-// 	}
-// 	return 200, resp.IdStr
-// }
+func Follow(consumerKey, consumerSecret, accessToken, accessTokenSecret, twitterHandle string) (int, string) {
+	anaconda.SetConsumerKey(consumerKey)
+	anaconda.SetConsumerSecret(consumerSecret)
+	api := anaconda.NewTwitterApi(accessToken, accessTokenSecret)
+	resp, err := api.FollowUser(twitterHandle)
+	if err != nil {
+		abc := err.(*anaconda.ApiError)
+		return abc.StatusCode, abc.Error()
+	}
+	return 200, resp.IdStr
+}
 func UnFollow(consumerKey, consumerSecret, accessToken, accessTokenSecret, twitterHandle string) (int, string) {
 	anaconda.SetConsumerKey(consumerKey)
 	anaconda.SetConsumerSecret(consumerSecret)

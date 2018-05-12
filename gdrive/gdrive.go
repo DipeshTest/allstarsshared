@@ -22,6 +22,7 @@ import (
 	"google.golang.org/api/googleapi"
 )
 
+// This function returns the Http client to connect to Google drive.
 func getHTTPClient(token string) *http.Client {
 	tok := oauth2.Token{}
 	tok.AccessToken = token
@@ -29,6 +30,7 @@ func getHTTPClient(token string) *http.Client {
 	return config.Client(context.Background(), &tok)
 }
 
+// DeleteFile deletes the google drive file associated with specified file Id
 func DeleteFile(fileId, token string, timeout string) (code int, message string) {
 	srv, _ := drive.New(getHTTPClient(token))
 	s, _ := time.ParseDuration(timeout + "s")
@@ -42,6 +44,9 @@ func DeleteFile(fileId, token string, timeout string) (code int, message string)
 	return 200, "File Deleted Successfully"
 
 }
+
+// CreateFile creates a google drive file by uploading the file specified in the input and it also gives user specified permissions to other google drive user on the uploaded file.
+// In addition , It will also send an EmailNotification to the user with whom the file is being shared.
 func CreateFile(token, filefullpath, emailAddr, role string, sendNotification bool, timeout string) (code int, message string) {
 	f, err := os.Open(filefullpath)
 	_, name := filepath.Split(filefullpath)
@@ -100,6 +105,7 @@ func CreateFile(token, filefullpath, emailAddr, role string, sendNotification bo
 	}
 }
 
+// ListFile allows you to list the all files of a particular google drive user.It also searches the specified file
 func ListFile(token, fileName, orderBy string, pageSize int64, pageToken string, timeout string) (code int, response string, fileCount int, nextPageToken string) {
 
 	srv, err := drive.New(getHTTPClient(token))

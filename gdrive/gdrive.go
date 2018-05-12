@@ -16,8 +16,7 @@ import (
 	"google.golang.org/api/googleapi"
 )
 
-func getHTTPClient(token string, timeout string) *http.Client {
-
+func getHTTPClient(token string) *http.Client {
 	tok := oauth2.Token{}
 	tok.AccessToken = token
 	config := oauth2.Config{}
@@ -25,7 +24,7 @@ func getHTTPClient(token string, timeout string) *http.Client {
 }
 
 func DeleteFile(fileId, token string, timeout string) (int, string) {
-	srv, _ := drive.New(getHTTPClient(token, timeout))
+	srv, _ := drive.New(getHTTPClient(token))
 	s, _ := time.ParseDuration(timeout + "s")
 	ctx, close := context.WithTimeout(context.Background(), s)
 	defer close()
@@ -45,7 +44,7 @@ func CreateFile(token, filefullpath, emailAddr, role string, sendNotification bo
 		return 101, err.Error()
 
 	} else {
-		srv, err := drive.New(getHTTPClient(token, timeout))
+		srv, err := drive.New(getHTTPClient(token))
 		ext := filepath.Ext(f.Name())
 		baseMimeType := mime.TypeByExtension(ext)
 		convertedMimeType := mime.TypeByExtension(ext)
@@ -86,7 +85,6 @@ func CreateFile(token, filefullpath, emailAddr, role string, sendNotification bo
 					if uploadSuccess {
 						a := err.(*googleapi.Error)
 						return res.HTTPStatusCode, "File Upload Successful, error while providing permissions," + a.Message
-
 					}
 				}
 			}
@@ -98,7 +96,7 @@ func CreateFile(token, filefullpath, emailAddr, role string, sendNotification bo
 
 func ListFile(token, fileName, orderBy string, pageSize int64, pageToken string, timeout string) (int, string, int, string) {
 
-	srv, err := drive.New(getHTTPClient(token, timeout))
+	srv, err := drive.New(getHTTPClient(token))
 	var searchString = ""
 	if len(strings.TrimSpace(fileName)) != 0 {
 		searchString = "name=\"" + fileName + "\""

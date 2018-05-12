@@ -4,7 +4,7 @@ PublishTweet, Retweet a particular tweet you like,
 Follow/UnFollow user on Twitter
 Block/Unblock user on Twitter
 DirectMessage a user on Twitter
-GetUserTimeline
+GetUserTimeline, get your timeline
 GetTrendsByPlace for a particular woeid(where on earth id)
 */
 package twitter

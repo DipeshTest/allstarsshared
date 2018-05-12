@@ -81,6 +81,7 @@ func generateResp(resp *http.Response) ResponseData {
 	return ResponseData{statusCode, responseMsg, "", ""}
 }
 
+//use this function to retrieve the list of numbers stored in your twilio account
 func RetrieveRecipientList(smsData Twilio) ResponseData {
 	req, _ := http.NewRequest("GET", smsData.UrlString, nil)
 	req.Header.Add("Authorization", "Basic "+base64.StdEncoding.EncodeToString([]byte(smsData.AccountSid+":"+smsData.AuthToken)))
@@ -107,6 +108,7 @@ func RetrieveRecipientList(smsData Twilio) ResponseData {
 	}
 }
 
+//use this function to sendSMS to multiple recipients
 func SendSMS(smsData Twilio, jobs <-chan string, results chan<- ResponseData) {
 
 	for j := range jobs {

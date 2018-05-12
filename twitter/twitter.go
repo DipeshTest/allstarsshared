@@ -1,10 +1,10 @@
 /*
-twitter package developed by Allstart team uses github.com/ChimeraCoder/anaconda to:
+twitter package developed by Allstars team uses github.com/ChimeraCoder/anaconda to:
 PublishTweet, Retweet a particular tweet you like,
 Follow/UnFollow user on Twitter
 Block/Unblock user on Twitter
 DirectMessage a user on Twitter
-GetUserTimeline
+GetUserTimeline, get your timeline
 GetTrendsByPlace for a particular woeid(where on earth id)
 */
 package twitter
@@ -17,6 +17,7 @@ import (
 	"github.com/ChimeraCoder/anaconda"
 )
 
+//use this function to Tweet, it accepts a string (tweet) and your creds
 func PostTweet(consumerKey, consumerSecret, accessToken, accessTokenSecret, tweet string) (statusCode int, message string) {
 	anaconda.SetConsumerKey(consumerKey)
 	anaconda.SetConsumerSecret(consumerSecret)
@@ -28,6 +29,8 @@ func PostTweet(consumerKey, consumerSecret, accessToken, accessTokenSecret, twee
 	}
 	return 200, twt.IdStr
 }
+
+// this function is used to retweet a particular tweet you like
 func ReTweet(consumerKey, consumerSecret, accessToken, accessTokenSecret string, tweetId int64) (statusCode int, message string) {
 	anaconda.SetConsumerKey(consumerKey)
 	anaconda.SetConsumerSecret(consumerSecret)
@@ -39,6 +42,8 @@ func ReTweet(consumerKey, consumerSecret, accessToken, accessTokenSecret string,
 	}
 	return 200, twt.IdStr
 }
+
+//this function is used to DirectMessage a user
 func DirectMessage(consumerKey, consumerSecret, accessToken, accessTokenSecret, directmsg, user string) (statusCode int, message string) {
 	anaconda.SetConsumerKey(consumerKey)
 	anaconda.SetConsumerSecret(consumerSecret)
@@ -50,6 +55,8 @@ func DirectMessage(consumerKey, consumerSecret, accessToken, accessTokenSecret, 
 	}
 	return 200, twt.IdStr
 }
+
+//use this function to UnFollow a user on Twitter
 func UnFollow(consumerKey, consumerSecret, accessToken, accessTokenSecret, twitterHandle string) (statusCode int, message string) {
 	anaconda.SetConsumerKey(consumerKey)
 	anaconda.SetConsumerSecret(consumerSecret)
@@ -61,6 +68,8 @@ func UnFollow(consumerKey, consumerSecret, accessToken, accessTokenSecret, twitt
 	}
 	return 200, resp.IdStr
 }
+
+//use this function to Block a user on Twitter
 func BlockUser(consumerKey, consumerSecret, accessToken, accessTokenSecret, twitterHandle string) (statusCode int, message string) {
 	anaconda.SetConsumerKey(consumerKey)
 	anaconda.SetConsumerSecret(consumerSecret)
@@ -72,6 +81,8 @@ func BlockUser(consumerKey, consumerSecret, accessToken, accessTokenSecret, twit
 	}
 	return 200, resp.IdStr
 }
+
+//use this function to UnBlock a user on Twitter.
 func UnBlockUser(consumerKey, consumerSecret, accessToken, accessTokenSecret, twitterHandle string) (statusCode int, message string) {
 	anaconda.SetConsumerKey(consumerKey)
 	anaconda.SetConsumerSecret(consumerSecret)
@@ -83,6 +94,8 @@ func UnBlockUser(consumerKey, consumerSecret, accessToken, accessTokenSecret, tw
 	}
 	return 200, resp.IdStr
 }
+
+//use this function to getYourTimeline
 func GetUserTimeline(consumerKey, consumerSecret, accessToken, accessTokenSecret string, pageCount, sinceId int) (statusCode int, message string) {
 	anaconda.SetConsumerKey(consumerKey)
 	anaconda.SetConsumerSecret(consumerSecret)
@@ -108,6 +121,7 @@ func GetUserTimeline(consumerKey, consumerSecret, accessToken, accessTokenSecret
 	return 200, string(resp)
 }
 
+//use this function to get trending hastags for a particular place
 func GetTrendsByPlace(consumerKey, consumerSecret, accessToken, accessTokenSecret string, placeId int64) (statusCode int, message string) {
 	anaconda.SetConsumerKey(consumerKey)
 	anaconda.SetConsumerSecret(consumerSecret)

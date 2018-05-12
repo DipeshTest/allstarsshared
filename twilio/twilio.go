@@ -1,3 +1,9 @@
+/*
+package twilio is a bussiness logic package for FLOGO Twilio connector developed by AllStars team,
+this package has the functions RetrieveRecipientList and SendSMS,
+RetrieveRecipientList can be used to retrieve all contacts stored/verified by user in his Twilio account,
+SendSMS is used to send SMSes to multiple recipients simultaneously.
+*/
 package twilio
 
 import (

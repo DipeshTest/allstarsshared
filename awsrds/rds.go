@@ -2,7 +2,6 @@ package awsrds
 
 import (
 	"encoding/json"
-	"fmt"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/awserr"
@@ -31,15 +30,13 @@ func StartRdsInstance(accessKeyId, secretAccessKey, region string, startDbInstnc
 	result, err := awsClient.StartDBInstance(startDbInstnceRequest)
 
 	if err != nil {
-
+		// Here we parse error response into the type RequestFailure first if success the corresponding error will be returned.
+		// otherwise it will be parsed  into generic Error type
+		// One parsing statement can be avoided thats why we have done the error parsing as follows.
 		if aerr, ok := err.(awserr.RequestFailure); ok {
-			fmt.Println(aerr.Error())
 			return aerr.StatusCode(), aerr.Error()
-
 		} else if aerr, ok := err.(awserr.Error); ok {
-			fmt.Println(aerr.Error())
 			return 106, aerr.Error()
-
 		}
 
 	}
@@ -54,15 +51,13 @@ func StopRdsInstance(accessKeyId, secretAccessKey, region string, stopDbInstnceR
 	result, err := awsClient.StopDBInstance(stopDbInstnceRequest)
 
 	if err != nil {
-
+		// Here we parse error response into the type RequestFailure first if success the corresponding error will be returned.
+		// otherwise it will be parsed  into generic Error type
+		// One parsing statement can be avoided thats why we have done the error parsing as follows.
 		if aerr, ok := err.(awserr.RequestFailure); ok {
-			fmt.Println(aerr.Error())
 			return aerr.StatusCode(), aerr.Error()
-
 		} else if aerr, ok := err.(awserr.Error); ok {
-			fmt.Println(aerr.Error())
 			return 106, aerr.Error()
-
 		}
 
 	}
@@ -77,15 +72,13 @@ func RebootRdsInstance(accessKeyId, secretAccessKey, region string, rebootDbInst
 	result, err := awsClient.RebootDBInstance(rebootDbInstnceRequest)
 
 	if err != nil {
-
+		// Here we parse error response into the type RequestFailure first if success the corresponding error will be returned.
+		// otherwise it will be parsed  into generic Error type
+		// One parsing statement can be avoided thats why we have done the error parsing as follows.
 		if aerr, ok := err.(awserr.RequestFailure); ok {
-			fmt.Println(aerr.Error())
 			return aerr.StatusCode(), aerr.Error()
-
 		} else if aerr, ok := err.(awserr.Error); ok {
-			fmt.Println(aerr.Error())
 			return 106, aerr.Error()
-
 		}
 
 	}
@@ -100,15 +93,13 @@ func DeleteRdsInstance(accessKeyId, secretAccessKey, region string, deleteDbInst
 	result, err := awsClient.DeleteDBInstance(deleteDbInstnceRequest)
 
 	if err != nil {
-
+		// Here we parse error response into the type RequestFailure first if success the corresponding error will be returned.
+		// otherwise it will be parsed  into generic Error type
+		// One parsing statement can be avoided thats why we have done the error parsing as follows.
 		if aerr, ok := err.(awserr.RequestFailure); ok {
-			fmt.Println(aerr.Error())
 			return aerr.StatusCode(), aerr.Error()
-
 		} else if aerr, ok := err.(awserr.Error); ok {
-			fmt.Println(aerr.Error())
 			return 106, aerr.Error()
-
 		}
 
 	}
@@ -124,15 +115,13 @@ func CreateRdsInstance(accessKeyId, secretAccessKey, region string, createDbInst
 	result, err := awsClient.CreateDBInstance(createDbInstnceRequest)
 
 	if err != nil {
-
+		// Here we parse error response into the type RequestFailure first if success the corresponding error will be returned.
+		// otherwise it will be parsed  into generic Error type
+		// One parsing statement can be avoided thats why we have done the error parsing as follows.
 		if aerr, ok := err.(awserr.RequestFailure); ok {
-			fmt.Println(aerr.Error())
 			return aerr.StatusCode(), aerr.Error()
-
 		} else if aerr, ok := err.(awserr.Error); ok {
-			fmt.Println(aerr.Error())
 			return 106, aerr.Error()
-
 		}
 
 	}

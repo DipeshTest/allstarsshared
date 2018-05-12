@@ -1,3 +1,12 @@
+/*
+package awsrds is a bussiness logic package for FLOGO AWS RDS connectors developed by AllStars team,
+this package has the functions StartRdsInstance,StopRdsInstance,RebootRdsInstance,DeleteRdsInstance and CreateRdsInstance,
+StartRdsInstance can be used to start specified AWS RDS DB Instance,
+StopRdsInstance can be used to stop specified AWS RDS DB Instance,
+RebootRdsInstance can be used to reboot specified AWS RDS DB Instance,
+DeleteRdsInstance can be used to delete specified AWS RDS DB Instance,
+CreateRdsInstance can be used to create specified new AWS RDS DB Instance with specified DB instance specification.
+*/
 package awsrds
 
 import (
@@ -10,6 +19,7 @@ import (
 	"github.com/aws/aws-sdk-go/service/rds"
 )
 
+// Creates AWS Client using accessKeyId,secretAccessKey and region specified in the input in order to connect to AWS as IAM user
 func getAwsClient(accessKeyId, secretAccessKey, region string) rds.RDS {
 	awsConfig := &aws.Config{
 		Credentials: credentials.NewStaticCredentials(accessKeyId, secretAccessKey, ""),
@@ -24,7 +34,8 @@ func getAwsClient(accessKeyId, secretAccessKey, region string) rds.RDS {
 	return *rdsClient
 }
 
-func StartRdsInstance(accessKeyId, secretAccessKey, region string, startDbInstnceRequest *rds.StartDBInstanceInput) (int, string) {
+//StartRdsInstance can be used to start specified AWS RDS DB Instance.
+func StartRdsInstance(accessKeyId, secretAccessKey, region string, startDbInstnceRequest *rds.StartDBInstanceInput) (code int, messgae string) {
 	awsClient := getAwsClient(accessKeyId, secretAccessKey, region)
 
 	result, err := awsClient.StartDBInstance(startDbInstnceRequest)
@@ -45,7 +56,8 @@ func StartRdsInstance(accessKeyId, secretAccessKey, region string, startDbInstnc
 
 }
 
-func StopRdsInstance(accessKeyId, secretAccessKey, region string, stopDbInstnceRequest *rds.StopDBInstanceInput) (int, string) {
+//StopRdsInstance can be used to stop specified AWS RDS DB Instance.
+func StopRdsInstance(accessKeyId, secretAccessKey, region string, stopDbInstnceRequest *rds.StopDBInstanceInput) (code int, message string) {
 	awsClient := getAwsClient(accessKeyId, secretAccessKey, region)
 
 	result, err := awsClient.StopDBInstance(stopDbInstnceRequest)
@@ -66,7 +78,8 @@ func StopRdsInstance(accessKeyId, secretAccessKey, region string, stopDbInstnceR
 
 }
 
-func RebootRdsInstance(accessKeyId, secretAccessKey, region string, rebootDbInstnceRequest *rds.RebootDBInstanceInput) (int, string) {
+//RebootRdsInstance can be used to reboot specified AWS RDS DB Instance.
+func RebootRdsInstance(accessKeyId, secretAccessKey, region string, rebootDbInstnceRequest *rds.RebootDBInstanceInput) (code int, message string) {
 	awsClient := getAwsClient(accessKeyId, secretAccessKey, region)
 
 	result, err := awsClient.RebootDBInstance(rebootDbInstnceRequest)
@@ -87,7 +100,8 @@ func RebootRdsInstance(accessKeyId, secretAccessKey, region string, rebootDbInst
 
 }
 
-func DeleteRdsInstance(accessKeyId, secretAccessKey, region string, deleteDbInstnceRequest *rds.DeleteDBInstanceInput) (int, string) {
+// DeleteRdsInstance can be used to delete specified AWS RDS DB Instance.
+func DeleteRdsInstance(accessKeyId, secretAccessKey, region string, deleteDbInstnceRequest *rds.DeleteDBInstanceInput) (code int, message string) {
 	awsClient := getAwsClient(accessKeyId, secretAccessKey, region)
 
 	result, err := awsClient.DeleteDBInstance(deleteDbInstnceRequest)
@@ -108,7 +122,8 @@ func DeleteRdsInstance(accessKeyId, secretAccessKey, region string, deleteDbInst
 
 }
 
-func CreateRdsInstance(accessKeyId, secretAccessKey, region string, createDbInstnceRequest *rds.CreateDBInstanceInput) (int, string) {
+// CreateRdsInstance can be used to create specified new AWS RDS DB Instance with specified DB instance specification.
+func CreateRdsInstance(accessKeyId, secretAccessKey, region string, createDbInstnceRequest *rds.CreateDBInstanceInput) (code int, message string) {
 
 	awsClient := getAwsClient(accessKeyId, secretAccessKey, region)
 

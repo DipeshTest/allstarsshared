@@ -1,3 +1,9 @@
+/*
+gdrive is a package used for creating/uploading fields, sending notifications to user when file is uploaded
+deleting a file form gdrive account,
+listing all the files that are stored in your grdive account, you can optionally specify a fileName to retrive OR
+mention the order of retrival, number of files to be retrieved.
+*/
 package gdrive
 
 import (
@@ -23,7 +29,7 @@ func getHTTPClient(token string) *http.Client {
 	return config.Client(context.Background(), &tok)
 }
 
-func DeleteFile(fileId, token string, timeout string) (int, string) {
+func DeleteFile(fileId, token string, timeout string) (code int, message string) {
 	srv, _ := drive.New(getHTTPClient(token))
 	s, _ := time.ParseDuration(timeout + "s")
 	ctx, close := context.WithTimeout(context.Background(), s)
@@ -36,7 +42,7 @@ func DeleteFile(fileId, token string, timeout string) (int, string) {
 	return 200, "File Deleted Successfully"
 
 }
-func CreateFile(token, filefullpath, emailAddr, role string, sendNotification bool, timeout string) (int, string) {
+func CreateFile(token, filefullpath, emailAddr, role string, sendNotification bool, timeout string) (code int, message string) {
 	f, err := os.Open(filefullpath)
 	_, name := filepath.Split(filefullpath)
 	defer f.Close()
@@ -94,7 +100,7 @@ func CreateFile(token, filefullpath, emailAddr, role string, sendNotification bo
 	}
 }
 
-func ListFile(token, fileName, orderBy string, pageSize int64, pageToken string, timeout string) (int, string, int, string) {
+func ListFile(token, fileName, orderBy string, pageSize int64, pageToken string, timeout string) (code int, response string, fileCount int, nextPageToken string) {
 
 	srv, err := drive.New(getHTTPClient(token))
 	var searchString = ""

@@ -1,3 +1,12 @@
+/*
+twitter package developed by Allstart team uses github.com/ChimeraCoder/anaconda to:
+PublishTweet, Retweet a particular tweet you like,
+Follow/UnFollow user on Twitter
+Block/Unblock user on Twitter
+DirectMessage a user on Twitter
+GetUserTimeline
+GetTrendsByPlace for a particular woeid(where on earth id)
+*/
 package twitter
 
 import (
@@ -8,7 +17,7 @@ import (
 	"github.com/ChimeraCoder/anaconda"
 )
 
-func PostTweet(consumerKey, consumerSecret, accessToken, accessTokenSecret, tweet string) (int, string) {
+func PostTweet(consumerKey, consumerSecret, accessToken, accessTokenSecret, tweet string) (statusCode int, message string) {
 	anaconda.SetConsumerKey(consumerKey)
 	anaconda.SetConsumerSecret(consumerSecret)
 	api := anaconda.NewTwitterApi(accessToken, accessTokenSecret)
@@ -19,7 +28,7 @@ func PostTweet(consumerKey, consumerSecret, accessToken, accessTokenSecret, twee
 	}
 	return 200, twt.IdStr
 }
-func ReTweet(consumerKey, consumerSecret, accessToken, accessTokenSecret string, tweetId int64) (int, string) {
+func ReTweet(consumerKey, consumerSecret, accessToken, accessTokenSecret string, tweetId int64) (statusCode int, message string) {
 	anaconda.SetConsumerKey(consumerKey)
 	anaconda.SetConsumerSecret(consumerSecret)
 	api := anaconda.NewTwitterApi(accessToken, accessTokenSecret)
@@ -30,7 +39,7 @@ func ReTweet(consumerKey, consumerSecret, accessToken, accessTokenSecret string,
 	}
 	return 200, twt.IdStr
 }
-func DirectMessage(consumerKey, consumerSecret, accessToken, accessTokenSecret, directmsg, user string) (int, string) {
+func DirectMessage(consumerKey, consumerSecret, accessToken, accessTokenSecret, directmsg, user string) (statusCode int, message string) {
 	anaconda.SetConsumerKey(consumerKey)
 	anaconda.SetConsumerSecret(consumerSecret)
 	api := anaconda.NewTwitterApi(accessToken, accessTokenSecret)
@@ -41,7 +50,7 @@ func DirectMessage(consumerKey, consumerSecret, accessToken, accessTokenSecret, 
 	}
 	return 200, twt.IdStr
 }
-func UnFollow(consumerKey, consumerSecret, accessToken, accessTokenSecret, twitterHandle string) (int, string) {
+func UnFollow(consumerKey, consumerSecret, accessToken, accessTokenSecret, twitterHandle string) (statusCode int, message string) {
 	anaconda.SetConsumerKey(consumerKey)
 	anaconda.SetConsumerSecret(consumerSecret)
 	api := anaconda.NewTwitterApi(accessToken, accessTokenSecret)
@@ -52,7 +61,7 @@ func UnFollow(consumerKey, consumerSecret, accessToken, accessTokenSecret, twitt
 	}
 	return 200, resp.IdStr
 }
-func BlockUser(consumerKey, consumerSecret, accessToken, accessTokenSecret, twitterHandle string) (int, string) {
+func BlockUser(consumerKey, consumerSecret, accessToken, accessTokenSecret, twitterHandle string) (statusCode int, message string) {
 	anaconda.SetConsumerKey(consumerKey)
 	anaconda.SetConsumerSecret(consumerSecret)
 	api := anaconda.NewTwitterApi(accessToken, accessTokenSecret)
@@ -63,7 +72,7 @@ func BlockUser(consumerKey, consumerSecret, accessToken, accessTokenSecret, twit
 	}
 	return 200, resp.IdStr
 }
-func UnBlockUser(consumerKey, consumerSecret, accessToken, accessTokenSecret, twitterHandle string) (int, string) {
+func UnBlockUser(consumerKey, consumerSecret, accessToken, accessTokenSecret, twitterHandle string) (statusCode int, message string) {
 	anaconda.SetConsumerKey(consumerKey)
 	anaconda.SetConsumerSecret(consumerSecret)
 	api := anaconda.NewTwitterApi(accessToken, accessTokenSecret)
@@ -74,7 +83,7 @@ func UnBlockUser(consumerKey, consumerSecret, accessToken, accessTokenSecret, tw
 	}
 	return 200, resp.IdStr
 }
-func GetUserTimeline(consumerKey, consumerSecret, accessToken, accessTokenSecret string, pageCount, sinceId int) (int, string) {
+func GetUserTimeline(consumerKey, consumerSecret, accessToken, accessTokenSecret string, pageCount, sinceId int) (statusCode int, message string) {
 	anaconda.SetConsumerKey(consumerKey)
 	anaconda.SetConsumerSecret(consumerSecret)
 	api := anaconda.NewTwitterApi(accessToken, accessTokenSecret)
@@ -99,7 +108,7 @@ func GetUserTimeline(consumerKey, consumerSecret, accessToken, accessTokenSecret
 	return 200, string(resp)
 }
 
-func GetTrendsByPlace(consumerKey, consumerSecret, accessToken, accessTokenSecret string, placeId int64) (int, string) {
+func GetTrendsByPlace(consumerKey, consumerSecret, accessToken, accessTokenSecret string, placeId int64) (statusCode int, message string) {
 	anaconda.SetConsumerKey(consumerKey)
 	anaconda.SetConsumerSecret(consumerSecret)
 	api := anaconda.NewTwitterApi(accessToken, accessTokenSecret)
@@ -115,7 +124,7 @@ func GetTrendsByPlace(consumerKey, consumerSecret, accessToken, accessTokenSecre
 	return 200, string(resp)
 }
 
-func Follow(consumerKey, consumerSecret, accessToken, accessTokenSecret, twitterHandle string) (int, string) {
+func Follow(consumerKey, consumerSecret, accessToken, accessTokenSecret, twitterHandle string) (statusCode int, message string) {
 	anaconda.SetConsumerKey(consumerKey)
 	anaconda.SetConsumerSecret(consumerSecret)
 	api := anaconda.NewTwitterApi(accessToken, accessTokenSecret)
